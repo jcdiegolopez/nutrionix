@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#files
+/Neo4j-44ff8a96-Created-2024-05-05.txt
