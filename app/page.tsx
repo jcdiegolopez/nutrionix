@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {getALlUsers} from "./lib/actions/user.actions";
+import {getALlUsers} from "@/lib/actions/user.actions";
 
 
 export default async function Home() {

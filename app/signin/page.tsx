@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { authenticate } from '../lib/actions/user.actions';
+import { authenticate } from '@/lib/actions/user.actions';
 import { useFormState, useFormStatus } from 'react-dom';
 
 export default function LoginForm() {
