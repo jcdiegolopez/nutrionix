@@ -19,6 +19,19 @@ const config = {
     },
     extend: {
       colors: {
+        malachite: {
+          50: '#f0fdf0',
+          100: '#ddfbdf',
+          200: '#bdf5c1',
+          300: '#89ec92',
+          400: '#4eda5b',
+          500: '#27c436',
+          600: '#1a9f27',
+          700: '#187d22',
+          800: '#186321',
+          900: '#16511d',
+          950: '#062d0b',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
