@@ -3,6 +3,12 @@ import { signOut } from "@/auth";
 
 
 const autho = () => {
+
+  try {
+    
+  } catch (error) {
+    
+  }
   return (
     <div>
       <form
@@ -20,3 +26,6 @@ const autho = () => {
 }
 
 export default autho
+
+
+
