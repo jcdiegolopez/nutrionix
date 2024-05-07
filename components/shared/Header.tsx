@@ -12,7 +12,7 @@ export const Header = () => {
   return (
     <header className='w-full border-b'>
         <div className='wrapper flex items-center justify-between'>
-            <Link href={`/`} className='w-10'>
+            <Link href={`/`} className='w-8 md:w-10 '>
                 <div className='flex flex-row items-center flex-nowrap'>
                   <Image src="/assets/images/logo.png" alt='Nutrionix logo' width={128} height={38} />
                   <h3 className={`h3-bold`}>utrionix</h3>
@@ -21,7 +21,7 @@ export const Header = () => {
               <nav className='md:flex-between hidden w-full max-w-xs'>
                 <NavItems/>
               </nav>
-            <div className='flex w-32 justify-end gap-3'>
+            <div className='flex justify-end gap-3 items-center'>
                 <MobileNav/>
                 <Button asChild className='rounded-full' size='lg'>
                   <Link href='/sign-in'>Log in</Link>
