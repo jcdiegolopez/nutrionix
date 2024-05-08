@@ -8,10 +8,11 @@ export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
   return (
+
     <form action={dispatch} className="space-y-3">
-      <div className="text-black flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
-        <h1 className={` mb-3 text-2xl`}>
-          Please log in to continue.
+      <div className="text-black flex-1 rounded-lg bg-slate-100 shadow-lg px-6 pb-4 pt-8 md:w-[350px]">
+        <h1 className={`h3-bold`}>
+          Sign In
         </h1>
         <div className="w-full">
           <div>
@@ -69,13 +70,14 @@ export default function LoginForm() {
         </div>
       </div>
     </form>
+
   );
 }
 
 function LoginButton() {
   const { pending } = useFormStatus();
   return (
-    <button className="bg-black mt-4 w-full" aria-disabled={pending}>
+    <button className="bg-black mt-4 w-full text-white rounded-lg h-8" aria-disabled={pending}>
       Log in 
     </button>
   );

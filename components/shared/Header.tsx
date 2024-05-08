@@ -24,7 +24,7 @@ export const Header = () => {
             <div className='flex justify-end gap-3 items-center'>
                 <MobileNav/>
                 <Button asChild className='rounded-full' size='lg'>
-                  <Link href='/signin'>Log in</Link>
+                  <Link href='/auth/signin'>Log in</Link>
                 </Button>
             </div>
         </div>
