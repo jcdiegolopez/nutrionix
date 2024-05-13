@@ -71,6 +71,12 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      backgroundImage: {
+        'dotted-pattern': "url('/assets/images/dotted-pattern.png')",
+      },
+      dropShadow: {
+        'custom': '0 10px 15px rgba(0, 0, 0, 0.5)', // 0.7 is the opacity
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
