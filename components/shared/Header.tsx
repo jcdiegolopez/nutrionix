@@ -8,7 +8,11 @@ import { Poppins } from 'next/font/google'
 
 const poppins = Poppins({weight: ["100","200","700"], subsets: ['latin']})
 
-export const Header = () => {
+type HeaderProps = {
+  type?: 'navbar' | 'hero'
+}
+
+export const Header = ({type = 'navbar'} : HeaderProps) => {
   return (
     <header className='w-full border-b'>
         <div className='wrapper flex items-center justify-between'>
@@ -19,13 +23,16 @@ export const Header = () => {
                 </div>
             </Link>
               <nav className='md:flex-between hidden w-full max-w-xs'>
-                <NavItems/>
+                {type == 'navbar' && <NavItems/>}
               </nav>
             <div className='flex justify-end gap-3 items-center'>
-                <MobileNav/>
-                <Button asChild className='rounded-full' size='lg'>
+                {type == 'hero' && <MobileNav/>}
+                { type == 'navbar' && (
+                  <Button asChild className='rounded-full' size='lg'>
                   <Link href='/auth/signin'>Log in</Link>
                 </Button>
+                )}
+                
             </div>
         </div>
     </header>
