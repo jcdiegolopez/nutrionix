@@ -1,11 +1,11 @@
 import Image from "next/image";
-import {getALlUsers} from "@/lib/actions/user.actions";
+import {getAllUsers} from "@/lib/actions/user.actions";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 
 export default async function Home() {
-  const users = await getALlUsers();
+  const users = await getAllUsers();
   console.log(users);
   return (
     <>
@@ -18,7 +18,7 @@ export default async function Home() {
             <Button asChild size={'lg'} className="button w-full md:w-fit bg-malachite-600">
               <Link href={'/'}>
                 Comienza!
-              </Link>
+              </Link> 
             </Button>
           </div>
           <Image src="/assets/images/banner.png" alt="Banner" width={1000} height={1000}
