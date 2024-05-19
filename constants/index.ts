@@ -5,11 +5,11 @@ export const headerLinks = [
     },
     {
       label: 'Food Recomendatios',
-      route: '/food/recomendations',
+      route: '/private/recomendations',
     },
     {
       label: 'My Profile',
-      route: '/profile',
+      route: '/private/profile',
     },
   ]
   

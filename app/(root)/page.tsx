@@ -1,12 +1,20 @@
 import Image from "next/image";
-import {getALlUsers} from "@/lib/actions/user.actions";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { SearchParamProps } from "@/types";
+import { getAllFoods } from "@/lib/actions/food.actions";
+import Collection from "@/components/shared/Collection";
 
+type classificationType = "Weight Loss" | "Gain Weight" | "Weight Maintenance" | "All";
+type healthyType = "Healthy" | "Unhealthy" | "All";
 
-export default async function Home() {
-  const users = await getALlUsers();
-  console.log(users);
+export default async function Home({searchParams}: SearchParamProps) {
+  const page = Number(searchParams?.page) || 1;
+  const searchText = (searchParams?.query as string) || '';
+  const classification = (searchParams?.classification as classificationType) || 'All';
+  const healthy = (searchParams?.healthy as healthyType) || 'All';
+  const foods = await getAllFoods({ limit: 6, page, classification: classification , query: searchText, healthy: healthy});
+  console.log(foods);
   return (
     <>
       <section className="bg-gray-100 bg-dotted-pattern bg-contain py-5 md:py-10">
@@ -24,6 +32,20 @@ export default async function Home() {
           <Image src="/assets/images/banner.png" alt="Banner" width={1000} height={1000}
           className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh] drop-shadow-custom" /> 
         </div>
+      </section>
+      <section id="events" className="wrapper my-8 flex flex-col gap-8 md:12">
+        <h2 className="h2-bold">Mas De Mil <br/>  Recetas Para Elegir...</h2>
+        <div className="flex w-full flex-col gap-5 md:flex-row ">
+          {/* <Search placeholder="Search events..." />
+          <CategoryFilter /> */}
+        </div>
+        <Collection data={foods?.data} 
+        emptyTitle={'No foods found'}
+        emptyStateSubtext={'Come back later'}
+        limit={6}
+        page={page}
+        totalPages={foods?.totalPages}
+        />
       </section>
     </>
   );

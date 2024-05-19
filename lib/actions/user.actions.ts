@@ -4,6 +4,7 @@ import connectToNeo4j from "../neo4j";
 import { handleError } from "../utils";
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcrypt';
+import { createUserParams } from '@/types';
 
 export async function authenticate(
     prevState: string | undefined,
@@ -35,7 +36,7 @@ export const createUser = async ({ username, password, email, name }: createUser
             `CREATE (u:User {name: $name, email: $email, username: $username, password: $password}) RETURN u`,
             { username, hashedPassword, email, name }
         );
-        session.close();
+        await session.close();
         return result.records[0].get('u').properties;
     } catch (error) {
         handleError(error);
@@ -50,7 +51,7 @@ export const getALlUsers = async () => {
         const result = await session.run(
             `MATCH (u:User) RETURN u`
         );
-        session.close();
+        await session.close();
         return result.records.map(( record: any ) =>  { return {...record.toObject().u.properties, id: record.toObject().u.identity.toNumber()}});
     } catch (error) {
         handleError(error);
@@ -65,7 +66,7 @@ export const getUserById = async (id: number) => {
             `MATCH (u:User) WHERE ID(u) = $id RETURN u`,
             { id }
         );
-        session.close();
+        await session.close();
         return result.records.map(( record: any ) =>  { return {...record.toObject().u.properties, id: record.toObject().u.identity.toNumber()}});
     } catch (error) {
         handleError(error);
@@ -80,7 +81,7 @@ export const getUser = async (email: string) => {
             `MATCH (u:User) WHERE u.email = $email RETURN u`,
             { email }
         );
-        session.close();
+        await session.close();
         return result.records.map(( record: any ) =>  { return {...record.toObject().u.properties, id: record.toObject().u.identity.toNumber()}});
     } catch (error) {
         handleError(error);
