@@ -47,7 +47,7 @@ const Card = async ( {
             <p className="p-medium-16  text-grey-500">
                 {` ${food.calories} Calories`}
             </p>
-            <Link href={`/private/recommendations/${food.id}`}> 
+            <Link href={`/foods/${food.id}`}> 
             <p className="p-medium-16 md:p-bold-20 line-clamp-2 flex-1 text-black">{capitalizeWords(food.name)}</p>
             </Link>
             

@@ -61,3 +61,19 @@ export async function getAllFoods({ query, limit = 6, page = 1, classification =
     throw error; // Es importante relanzar el error para manejo adecuado
   }
 }
+
+export const getFoodById = async (id: number) => {
+  try {
+      const driver = await connectToNeo4j();
+      const session = driver.session();
+      const result = await session.run(
+          `MATCH (n:Food) WHERE ID(n) = $id RETURN n`,
+          { id }
+      );
+      await session.close();
+      
+      return result.records.map(( record: any ) =>  { return {...record.toObject().n.properties, id: record.toObject().n.identity.toNumber()}});
+  } catch (error) {
+      handleError(error);
+  }
+}
