@@ -1,3 +1,4 @@
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -5,6 +6,7 @@ import { Button } from '../ui/button'
 import NavItems from './NavItems'
 import MobileNav from './MobileNav'
 import { Poppins } from 'next/font/google'
+import { signOut, auth } from '@/auth'
 
 const poppins = Poppins({weight: ["100","200","700"], subsets: ['latin']})
 
@@ -12,7 +14,9 @@ type HeaderProps = {
   type?: 'navbar' | 'hero'
 }
 
-export const Header = ({type = 'navbar'} : HeaderProps) => {
+export const Header = async ({type = 'navbar'} : HeaderProps) => {
+  const user = await auth();
+  console.log(user);
   return (
     <header className='w-full border-b'>
         <div className='wrapper flex items-center justify-between'>
@@ -29,9 +33,20 @@ export const Header = ({type = 'navbar'} : HeaderProps) => {
                 {type == 'hero' && <MobileNav/>}
                 { type == 'navbar' && (
                   <Button asChild className='rounded-full' size='lg'>
-                  <Link href='/auth/signin'>Log in</Link>
-                </Button>
+                    <Link href='/auth/signin'>Log in</Link>
+                  </Button>
+                  
                 )}
+                <form
+                  action={async () => {
+                    'use server';
+                    await signOut();
+                  }}
+                >
+                  <Button className='rounded-full' size='lg'>
+                    Sign Out
+                  </Button>
+                </form>
                 
             </div>
         </div>

@@ -1,5 +1,12 @@
 
 
+export type User = {
+  id: string;
+  username: string;
+  email: string;
+  // otros campos del usuario que puedas tener
+}
+
 export type createUserParams = {
     email: string;
     username: string;

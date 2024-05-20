@@ -58,7 +58,7 @@ export const handleError = (error: unknown) => {
       const imageUrl = response.data.photos[0]?.src.medium;
       return imageUrl;
     } catch (error) {
-      console.error('Error fetching image from Pexels:', error);
+      console.error('Error fetching image from Pexels');
       return null;
     }
   }
