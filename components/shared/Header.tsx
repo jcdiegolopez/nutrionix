@@ -15,8 +15,7 @@ type HeaderProps = {
 }
 
 export const Header = async ({type = 'navbar'} : HeaderProps) => {
-  const user = await auth();
-  console.log(user);
+  
   return (
     <header className='w-full border-b'>
         <div className='wrapper flex items-center justify-between'>
