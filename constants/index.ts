@@ -5,7 +5,7 @@ export const headerLinks = [
     },
     {
       label: 'Food Recomendatios',
-      route: '/private/recomendations',
+      route: '/private/recommendations',
     },
     {
       label: 'My Profile',

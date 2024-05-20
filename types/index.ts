@@ -48,3 +48,11 @@ export type UrlQueryParams = {
     limit: number;
     page: number;
   }
+
+export type classificationType = "Weight Loss" | "Gain Weight" | "Weight Maintenance" | "All";
+export type healthyType = "Healthy" | "Unhealthy" | "All";
+
+export type RemoveUrlQueryParams = {
+  params: string
+  keysToRemove: string[]
+}

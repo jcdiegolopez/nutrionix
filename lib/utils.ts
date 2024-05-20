@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import qs from 'query-string'
-import { UrlQueryParams } from "@/types"
+import { RemoveUrlQueryParams, UrlQueryParams } from "@/types"
 import axios from 'axios';
 
 const API_KEY = process.env.NEXT_PEXELS_API_KEY
@@ -61,4 +61,20 @@ export const handleError = (error: unknown) => {
       console.error('Error fetching image from Pexels:', error);
       return null;
     }
+  }
+
+  export function removeKeysFromQuery({ params, keysToRemove }: RemoveUrlQueryParams) {
+    const currentUrl = qs.parse(params)
+  
+    keysToRemove.forEach(key => {
+      delete currentUrl[key]
+    })
+  
+    return qs.stringifyUrl(
+      {
+        url: window.location.pathname,
+        query: currentUrl,
+      },
+      { skipNull: true }
+    )
   }
