@@ -75,22 +75,6 @@ export const createUser = async ({ username, password, email }: createUserParams
   }
 }
 
-export const getUser = async (email: string) => {
-  try {
-    const driver = await connectToNeo4j();
-    const session = driver.session();
-    const result = await session.run(
-      `MATCH (u:User) WHERE u.email = $email RETURN u`,
-      { email }
-    );
-    session.close();
-    return result.records.map((record: any) => {
-      return { ...record.toObject().u.properties, id: record.toObject().u.identity.toNumber() };
-    });
-  } catch (error) {
-    handleError(error);
-  }
-}
 
 export const getAllUsers = async () => {
     try {

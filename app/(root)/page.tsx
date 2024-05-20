@@ -5,14 +5,17 @@ import { SearchParamProps } from "@/types";
 import { getAllFoods } from "@/lib/actions/food.actions";
 import Collection from "@/components/shared/Collection";
 import { classificationType, healthyType } from "@/types";
+import { auth } from "@/auth";
 
 export default async function Home({searchParams}: SearchParamProps) {
   const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || '';
   const classification = (searchParams?.classification as classificationType) || 'All';
   const healthy = (searchParams?.health as healthyType) || 'All';
+  const user = await auth();
   const foods = await getAllFoods({ limit: 6, page, classification: classification , query: searchText, healthy: healthy});
   console.log(foods);
+  console.log(user);
   return (
     <>
       <section className="bg-gray-100 bg-dotted-pattern bg-contain py-5 md:py-10">
