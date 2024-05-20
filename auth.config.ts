@@ -8,11 +8,12 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnNashe = nextUrl.pathname.startsWith('/private');
+      const isOnAuth = nextUrl.pathname.startsWith('/auth');
       if (isOnNashe) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL('/private', nextUrl));
+      } else if (isOnAuth && isLoggedIn ) {
+        return Response.redirect(new URL('/', nextUrl));
       }
       return true;
     },

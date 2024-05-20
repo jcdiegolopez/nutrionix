@@ -4,6 +4,7 @@ import connectToNeo4j from "../neo4j";
 import { handleError } from "../utils";
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcrypt';
+import { createUserParams } from '@/types';
 
 export async function signUp(
   prevState: string | undefined,
@@ -98,9 +99,41 @@ export const getAllUsers = async () => {
         const result = await session.run(
             `MATCH (u:User) RETURN u`
         );
-        session.close();
+        await session.close();
         return result.records.map(( record: any ) =>  { return {...record.toObject().u.properties, id: record.toObject().u.identity.toNumber()}});
     } catch (error) {
         handleError(error);
     }
 }
+
+export const getUserById = async (id: number) => {
+    try {
+        const driver = await connectToNeo4j();
+        const session = driver.session();
+        const result = await session.run(
+            `MATCH (u:User) WHERE ID(u) = $id RETURN u`,
+            { id }
+        );
+        await session.close();
+        return result.records.map(( record: any ) =>  { return {...record.toObject().u.properties, id: record.toObject().u.identity.toNumber()}});
+    } catch (error) {
+        handleError(error);
+    }
+}
+
+export const getUser = async (email: string) => {
+    try {
+        const driver = await connectToNeo4j();
+        const session = driver.session();
+        const result = await session.run(
+            `MATCH (u:User) WHERE u.email = $email RETURN u`,
+            { email }
+        );
+        await session.close();
+        return result.records.map(( record: any ) =>  { return {...record.toObject().u.properties, id: record.toObject().u.identity.toNumber()}});
+    } catch (error) {
+        handleError(error);
+    }
+}
+
+
