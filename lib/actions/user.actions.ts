@@ -1,10 +1,10 @@
 'use server'
-import { signIn } from "@/auth";
+import { signIn, auth} from "@/auth";
 import connectToNeo4j from "../neo4j";
 import { handleError } from "../utils";
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcrypt';
-import { createUserParams } from '@/types';
+import { createUserParams, updateProfileParams} from '@/types';
 
 export async function signUp(
   prevState: string | undefined,
@@ -74,6 +74,37 @@ export const createUser = async ({ username, password, email }: createUserParams
     handleError(error);
   }
 }
+
+export const updateProfile = async ({
+  name,
+  gender,
+  age,
+  weight,
+  height,
+  objective,
+}: updateProfileParams) => {
+  try {
+    const driver = await connectToNeo4j();
+    const session = driver.session();
+    const userObj = await auth();
+    const userEmail = userObj?.user?.email;
+
+    const result = await session.run(
+      `
+      MATCH (u:User {id: $userId})
+      SET u.name = $name, u.gender = $gender, u.age = $age, u.weight = $weight, u.height = $height, u.objective = $objective
+      RETURN u
+      `,
+      {userEmail, name, gender, age, weight, height, objective }
+    );
+
+    session.close();
+
+    return result.records[0].get('u').properties;
+  } catch (error) {
+    handleError(error);
+  }
+};
 
 
 export const getAllUsers = async () => {

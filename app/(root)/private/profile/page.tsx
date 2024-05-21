@@ -1,0 +1,166 @@
+'use client';
+import { useState } from 'react';
+import { useFormState, useFormStatus } from 'react-dom';
+import * as Form from '@radix-ui/react-form';
+import { signUp } from '@/lib/actions/user.actions';
+export default function ProfileForm() {
+  const [errorMessage, dispatch] = useFormState(signUp, undefined);
+
+  return (
+    <div className="py-5">
+    <form action={dispatch} className="space-y-3">
+      <div className="text-black flex-1 rounded-lg bg-white px-10 pb-5 pt-8 md:w-[650px] mx-auto">
+        <h1 className={`h3-bold text-center`}>Lets Create Your Profile</h1>
+        <div className="w-full">
+          <div>
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              htmlFor="name"
+            >
+              Name
+            </label>
+            <div className="relative">
+              <input
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+          </div>
+          <div className="mt-4">
+            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900">
+              Gender
+            </label>
+            <div className="flex space-x-4">
+              <label>
+                <input type="radio" name="gender" value="male" required />
+                <span className="ml-2">Male</span>
+              </label>
+              <label>
+                <input type="radio" name="gender" value="female" required />
+                <span className="ml-2">Female</span>
+              </label>
+            </div>
+          </div>
+          <div className="mt-4">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              htmlFor="age"
+            >
+              Age
+            </label>
+            <div className="relative">
+              <input
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                id="age"
+                type="number"
+                name="age"
+                placeholder="Enter your age"
+                required
+                min={18}
+              />
+            </div>
+          </div>
+          <div className="mt-4">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              htmlFor="weight"
+            >
+              Weight (kg)
+            </label>
+            <div className="relative">
+              <input
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                id="weight"
+                type="number"
+                name="weight"
+                placeholder="Enter your weight"
+                required
+                min={0}
+                step={0.1}
+              />
+            </div>
+          </div>
+          <div className="mt-4">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              htmlFor="height"
+            >
+              Height (cm)
+            </label>
+            <div className="relative">
+              <input
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                id="height"
+                type="number"
+                name="height"
+                placeholder="Enter your height"
+                required
+                min={0}
+                step={1}
+              />
+            </div>
+          </div>
+          <div className="mt-4">
+            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900">
+              Objective
+            </label>
+            <div className="flex flex-col space-y-2">
+              <label>
+                <input type="radio" name="objective" value="gain" required />
+                <span className="ml-2">Gain weight</span>
+              </label>
+              <label>
+                <input type="radio" name="objective" value="maintain" required />
+                <span className="ml-2">Maintain weight</span>
+              </label>
+              <label>
+                <input type="radio" name="objective" value="lose" required />
+                <span className="ml-2">Lose weight</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <SubmitButton />
+        <div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
+          {errorMessage && (
+            <>
+              <p className="text-sm text-red-500">{errorMessage}</p>
+            </>
+          )}
+        </div>
+      </div>
+    </form>
+    </div>
+  );
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <div className="grid justify-items-center">
+    <button
+      className="overflow-hidden mt-4 w-40 relative p-2 h-12 bg-black text-white border-none rounded-md text-xl font-bold cursor-pointer z-10 group" aria-disabled={pending}
+    >
+      Crear
+      <span
+        className="absolute w-44 h-40 -top-8 -left-2 bg-green-200 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"
+      ></span>
+      <span
+        className="absolute w-44 h-40 -top-8 -left-2 bg-green-400 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"
+      ></span>
+      <span
+        className="absolute w-44 h-40 -top-8 -left-2 bg-green-600 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left"
+      ></span>
+      <span
+        className="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2.5 left-12 z-10"
+        >¡Perfil!</span>
+    </button>
+
+    </div>
+  );
+}

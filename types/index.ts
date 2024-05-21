@@ -13,6 +13,15 @@ export type createUserParams = {
     password: string;
 }
 
+export type updateProfileParams = {
+  name : string;
+  gender : string;
+  age : number;
+  weight : number;
+  height : number;
+  objective : string;
+}
+
 export type signInParams = {
     email: string;
     password: string;
