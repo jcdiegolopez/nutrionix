@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
-import * as Form from '@radix-ui/react-form';
 import { signUp } from '@/lib/actions/user.actions';
 export default function ProfileForm() {
   const [errorMessage, dispatch] = useFormState(signUp, undefined);
@@ -34,15 +33,33 @@ export default function ProfileForm() {
             <label className="mb-3 mt-5 block text-xs font-medium text-gray-900">
               Gender
             </label>
-            <div className="flex space-x-4">
-              <label>
-                <input type="radio" name="gender" value="male" required />
-                <span className="ml-2">Male</span>
-              </label>
-              <label>
-                <input type="radio" name="gender" value="female" required />
-                <span className="ml-2">Female</span>
-              </label>
+            <div className="flex space-x-4 radio-button-container">
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  className="radio-button__input"
+                  id="radio1"
+                  name="radio-group"
+                  value="Male"
+                />
+                <label className="radio-button__label" htmlFor="radio1">
+                  <span className="radio-button__custom"></span>
+                  Male
+                </label>
+              </div>
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  className="radio-button__input"
+                  id="radio2"
+                  name="radio-group"
+                  value="Female"
+                />
+                <label className="radio-button__label" htmlFor="radio2">
+                  <span className="radio-button__custom"></span>
+                  Female
+                </label>
+              </div>
             </div>
           </div>
           <div className="mt-4">
@@ -108,19 +125,46 @@ export default function ProfileForm() {
             <label className="mb-3 mt-5 block text-xs font-medium text-gray-900">
               Objective
             </label>
-            <div className="flex flex-col space-y-2">
-              <label>
-                <input type="radio" name="objective" value="gain" required />
-                <span className="ml-2">Gain weight</span>
-              </label>
-              <label>
-                <input type="radio" name="objective" value="maintain" required />
-                <span className="ml-2">Maintain weight</span>
-              </label>
-              <label>
-                <input type="radio" name="objective" value="lose" required />
-                <span className="ml-2">Lose weight</span>
-              </label>
+            <div className="flex space-x-4 radio-button-container">
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  className="radio-button__input"
+                  id="radioWeight1"
+                  name="radio-group"
+                  value="Gain Weight"
+                />
+                <label className="radio-button__label" htmlFor="radioWeight1">
+                  <span className="radio-button__custom"></span>
+                  Gain Weight
+                </label>
+              </div>
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  className="radio-button__input"
+                  id="radioWeight2"
+                  name="radio-group"
+                  value="Maintain Weight"
+                />
+                <label className="radio-button__label" htmlFor="radioWeight2">
+                  <span className="radio-button__custom"></span>
+                  Maintain Weight
+                </label>
+              </div>
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  className="radio-button__input"
+                  id="radioWeight3"
+                  name="radio-group"
+                  value="Lose Weight"
+                />
+                <label className="radio-button__label" htmlFor="radioWeight3">
+                  <span className="radio-button__custom"></span>
+                  Lose Weight
+                </label>
+              </div>
             </div>
           </div>
         </div>

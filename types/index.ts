@@ -4,6 +4,12 @@ export type User = {
   id: string;
   username: string;
   email: string;
+  name? : string;
+  gender? : string;
+  age? : number;
+  weight? : number;
+  height? : number;
+  objective? : string;
   // otros campos del usuario que puedas tener
 }
 
