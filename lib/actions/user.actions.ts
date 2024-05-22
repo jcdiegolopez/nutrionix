@@ -75,23 +75,32 @@ export const createUser = async ({ username, password, email }: createUserParams
   }
 }
 
-export const updateProfile = async ({
-  name,
-  gender,
-  age,
-  weight,
-  height,
-  objective,
-}: updateProfileParams) => {
+export const updateProfile = async (
+  prevState: string | undefined,
+  formData: FormData,) => {
   try {
     const driver = await connectToNeo4j();
     const session = driver.session();
     const userObj = await auth();
     const userEmail = userObj?.user?.email;
+    const name = formData.get("name") as string;
+    const gender = formData.get("gender") as string;
+    const age = formData.get("age") as string;
+    const weight = formData.get("weight") as string;
+    const height = formData.get("height") as string;
+    const objective = formData.get("objective") as string;
+    console.log("Changing profile for user: " + userEmail);
+    console.log(name);
+    console.log(gender);
+    console.log(age);
+    console.log(weight);
+    console.log(height);
+    console.log(objective);
+    console.log("--------------------");
 
     const result = await session.run(
       `
-      MATCH (u:User {id: $userId})
+      MATCH (u:User {email: $userEmail})
       SET u.name = $name, u.gender = $gender, u.age = $age, u.weight = $weight, u.height = $height, u.objective = $objective
       RETURN u
       `,

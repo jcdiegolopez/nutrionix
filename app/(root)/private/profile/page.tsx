@@ -1,13 +1,25 @@
 'use client';
 import { useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
-import { signUp } from '@/lib/actions/user.actions';
+import { updateProfile } from '@/lib/actions/user.actions';
+import { useRouter } from 'next/navigation'; // Import useRouter
 export default function ProfileForm() {
-  const [errorMessage, dispatch] = useFormState(signUp, undefined);
+  const router = useRouter(); // Initialize useRouter
+  const [errorMessage, dispatch] = useFormState(updateProfile, undefined);
+  const handleSubmit = async (event: any) => {
+    try {
+      await dispatch(event);
+      router.push('/private/recommendations'); // Redirect to success page
+    } catch (error : any) {
+      // Handle error (you already have error handling in place)
+      throw(error.message);
+    }
+  };
+
 
   return (
     <div className="py-5">
-    <form action={dispatch} className="space-y-3">
+    <form action={handleSubmit} className="space-y-3">
       <div className="text-black flex-1 rounded-lg bg-white px-10 pb-5 pt-8 md:w-[650px] mx-auto">
         <h1 className={`h3-bold text-center`}>Lets Create Your Profile</h1>
         <div className="w-full">
@@ -39,7 +51,7 @@ export default function ProfileForm() {
                   type="radio"
                   className="radio-button__input"
                   id="radio1"
-                  name="radio-group"
+                  name="gender"
                   value="Male"
                 />
                 <label className="radio-button__label" htmlFor="radio1">
@@ -52,7 +64,7 @@ export default function ProfileForm() {
                   type="radio"
                   className="radio-button__input"
                   id="radio2"
-                  name="radio-group"
+                  name="gender"
                   value="Female"
                 />
                 <label className="radio-button__label" htmlFor="radio2">
@@ -131,7 +143,7 @@ export default function ProfileForm() {
                   type="radio"
                   className="radio-button__input"
                   id="radioWeight1"
-                  name="radio-group"
+                  name="objective"
                   value="Gain Weight"
                 />
                 <label className="radio-button__label" htmlFor="radioWeight1">
@@ -144,7 +156,7 @@ export default function ProfileForm() {
                   type="radio"
                   className="radio-button__input"
                   id="radioWeight2"
-                  name="radio-group"
+                  name="objective"
                   value="Maintain Weight"
                 />
                 <label className="radio-button__label" htmlFor="radioWeight2">
@@ -157,7 +169,7 @@ export default function ProfileForm() {
                   type="radio"
                   className="radio-button__input"
                   id="radioWeight3"
-                  name="radio-group"
+                  name="objective"
                   value="Lose Weight"
                 />
                 <label className="radio-button__label" htmlFor="radioWeight3">

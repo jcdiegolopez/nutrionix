@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { authenticate } from '@/lib/actions/user.actions';
 import { useFormState, useFormStatus } from 'react-dom';
+import Link from 'next/link';
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -55,6 +56,9 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
+        <div className = "w-full text-center pt-4">
+            <Link href="/auth/signup" className="text-malachite-500 text-xs hover:text-malachite-600">¿Don't have an account? Sign up here.</Link>
+        </div>
         <LoginButton />
         <div
           className="flex h-8 items-end space-x-1"
@@ -77,7 +81,7 @@ export default function LoginForm() {
 function LoginButton() {
   const { pending } = useFormStatus();
   return (
-    <button className="bg-black mt-4 w-full text-white rounded-lg h-8" aria-disabled={pending}>
+    <button className="bg-black mt-1 w-full text-white rounded-lg h-8" aria-disabled={pending}>
       Log in 
     </button>
   );

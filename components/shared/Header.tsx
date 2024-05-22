@@ -1,4 +1,3 @@
-
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -15,6 +14,8 @@ type HeaderProps = {
 }
 
 export const Header = async ({type = 'navbar'} : HeaderProps) => {
+  const user = await auth();
+
   
   return (
     <header className='w-full border-b'>
@@ -29,23 +30,23 @@ export const Header = async ({type = 'navbar'} : HeaderProps) => {
                 {type == 'navbar' && <NavItems/>}
               </nav>
             <div className='flex justify-end gap-3 items-center'>
-                {type == 'hero' && <MobileNav/>}
-                { type == 'navbar' && (
+                {type == 'navbar' && <MobileNav/>}
+                { type == 'navbar' && !user && (
                   <Button asChild className='rounded-full' size='lg'>
                     <Link href='/auth/signin'>Log in</Link>
                   </Button>
                   
                 )}
-                <form
-                  action={async () => {
-                    'use server';
-                    await signOut();
-                  }}
-                >
-                  <Button className='rounded-full' size='lg'>
-                    Sign Out
-                  </Button>
-                </form>
+            {user && <form
+              action={async () => {
+                'use server';
+                await signOut();
+              }}
+            >
+              <Button className='rounded-full' size='lg'>
+                Sign Out
+              </Button>
+            </form>}
                 
             </div>
         </div>
