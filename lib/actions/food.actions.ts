@@ -2,10 +2,18 @@ import { GetAllFoodsParams } from "@/types";
 import connectToNeo4j from "../neo4j";
 import { handleError } from "../utils";
 
-export async function getAllFoods({ query, limit = 6, page = 1, classification = 'All', healthy = 'All' }: GetAllFoodsParams) {
+export async function getAllFoods({ 
+  query, 
+  limit = 6, 
+  page = 1, 
+  classification = 'All', 
+  healthy = 'All',
+  caloriesWanted
+}: GetAllFoodsParams & { caloriesWanted?: number }) {
   try {
 
-    const skipAmount = (page - 1) * limit; // Aseguramos que skipAmount sea un entero
+    console.log(caloriesWanted);
+    const skipAmount = (page - 1) * limit; // Ensure skipAmount is an integer
 
     const driver = await connectToNeo4j();
     const session = driver.session();
@@ -25,8 +33,12 @@ export async function getAllFoods({ query, limit = 6, page = 1, classification =
       cypherQuery += ' AND f.healthiness = $healthy';
       params.healthy = healthy;
     }
+    if (caloriesWanted !== undefined) {
+      cypherQuery += ' AND f.calories <= $caloriesWanted';
+      params.caloriesWanted = caloriesWanted;
+    }
 
-    // Incorporamos los valores de limit y skipAmount directamente en la consulta
+    // Incorporate limit and skipAmount directly in the query
     cypherQuery += ` RETURN f SKIP ${skipAmount} LIMIT ${limit}`;
 
     const result = await session.run(cypherQuery, params);
@@ -46,6 +58,9 @@ export async function getAllFoods({ query, limit = 6, page = 1, classification =
     if (healthy !== 'All') {
       countQuery += ' AND f.healthiness = $healthy';
     }
+    if (caloriesWanted !== undefined) {
+      countQuery += ' AND f.calories <= $caloriesWanted';
+    }
     countQuery += ' RETURN count(f) as count';
 
     const countResult = await session.run(countQuery, params);
@@ -58,6 +73,6 @@ export async function getAllFoods({ query, limit = 6, page = 1, classification =
     };
   } catch (error) {
     handleError(error);
-    throw error; // Es importante relanzar el error para manejo adecuado
+    throw error; // It's important to rethrow the error for proper handling
   }
 }

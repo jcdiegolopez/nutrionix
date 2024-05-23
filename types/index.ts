@@ -1,6 +1,6 @@
 
 
-export type User = {
+export type UserCa = {
   id: string;
   username: string;
   email: string;
@@ -71,6 +71,7 @@ export type UrlQueryParams = {
   }
 
 export type classificationType = "Weight Loss" | "Gain Weight" | "Weight Maintenance" | "All";
+export type proportionType = "1/3" | "1/4" | "1/5" | "1/6" | "1/7" | "1/8" | "Any"; 
 export type healthyType = "Healthy" | "Unhealthy" | "All";
 
 export type RemoveUrlQueryParams = {

@@ -1,4 +1,5 @@
 import type { NextAuthConfig } from 'next-auth';
+import type { UserCa } from '@/types';
 
 export const authConfig = {
   pages: {
@@ -17,12 +18,12 @@ export const authConfig = {
       }
       return true;
     },
-    async session({ session, token }) {
+    async session({ session, token}) {
       // Include user data in the session, excluding the password
 
-      if (token?.user) {
+      if (token?.user ) {
         
-        const user = { id: token.user.id, email: token.user.email, username: token.user.username};
+        const user = { id: token.user.id, email: token.user.email, username: token.user.username, name: token.user.name, weight: token.user.weight, height: token.user.height, age: token.user.age, objective: token.user.objective};
         session.user = user;
         
         
