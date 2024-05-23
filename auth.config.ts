@@ -18,7 +18,7 @@ export const authConfig = {
       }
       return true;
     },
-    async session({ session, token}) {
+    async session({ session, token} : { session: any, token: any }) {
       // Include user data in the session, excluding the password
 
       if (token?.user ) {

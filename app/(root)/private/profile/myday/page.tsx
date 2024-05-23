@@ -7,7 +7,7 @@ import MyFoods from "@/components/shared/MyFoods";
 
 
 const Page = async () => {
-  const user = await auth();
+  const user = await auth() as any;
   console.log(user);
   const isUserDataIncomplete = !user?.user?.gender || !user?.user?.name || !user?.user?.weight || !user?.user?.age || !user?.user?.height || !user?.user?.objective;
 
