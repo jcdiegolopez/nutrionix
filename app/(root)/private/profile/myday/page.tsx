@@ -1,16 +1,18 @@
 import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import MyFoods from "@/components/shared/MyFoods";
+
+
 
 
 const Page = async () => {
   const user = await auth();
-
-
-  // Verificar si el usuario tiene todas las propiedades necesarias
+  console.log(user);
   const isUserDataIncomplete = !user?.user?.gender || !user?.user?.name || !user?.user?.weight || !user?.user?.age || !user?.user?.height || !user?.user?.objective;
 
   return (
+    <>
     <section className="bg-gray-100 bg-dotted-pattern bg-contain py-5 md:py-10 min-h-screen">
       {isUserDataIncomplete ? (
         <div className="text-center py-8">
@@ -36,6 +38,8 @@ const Page = async () => {
         </div>
       )}
     </section>
+    <MyFoods />
+    </>
   );
 };
 

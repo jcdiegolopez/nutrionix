@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge"
 import qs from 'query-string'
 import { RemoveUrlQueryParams, UrlQueryParams } from "@/types"
 import axios from 'axios';
+import { auth } from "@/auth";
 
 const API_KEY = process.env.NEXT_PEXELS_API_KEY
 
@@ -78,3 +79,4 @@ export const handleError = (error: unknown) => {
       { skipNull: true }
     )
   }
+

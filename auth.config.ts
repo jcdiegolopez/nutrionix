@@ -23,7 +23,7 @@ export const authConfig = {
 
       if (token?.user ) {
         
-        const user = { id: token.user.id, email: token.user.email, username: token.user.username, name: token.user.name, weight: token.user.weight, height: token.user.height, age: token.user.age, objective: token.user.objective};
+        const user = { id: token.user.id, email: token.user.email, username: token.user.username, gender: token.user.gender, name: token.user.name, weight: token.user.weight, height: token.user.height, age: token.user.age, objective: token.user.objective};
         session.user = user;
         
         
