@@ -9,7 +9,7 @@ export default function ProfileForm() {
   const handleSubmit = async (event: any) => {
     try {
       await dispatch(event);
-      router.push('/private/recommendations'); // Redirect to success page
+      router.push('/private/profile/myday'); // Redirect to success page
     } catch (error : any) {
       // Handle error (you already have error handling in place)
       throw(error.message);
