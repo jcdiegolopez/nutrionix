@@ -12,7 +12,7 @@ export async function getAllFoods({
 }: GetAllFoodsParams & { caloriesWanted?: number }) {
   try {
 
-    console.log(caloriesWanted);
+ 
     const skipAmount = (page - 1) * limit; // Ensure skipAmount is an integer
 
     const driver = await connectToNeo4j();
