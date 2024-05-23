@@ -4,7 +4,7 @@ import { IFood } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import HoverFood from "./HoverFood";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getSavedFoods, clearFoods } from "@/lib/localUtils";
 
 type CardProps = {
@@ -12,18 +12,35 @@ type CardProps = {
     added?: boolean;
 }
 
-const Card =  ({
+const Card = ({
     food,
     added = false
 }: CardProps) => {
-    const imageUrl =  '/assets/icons/image-missing.jpg';
+    const [imageUrl, setImageUrl] = useState('/assets/icons/image-missing.jpg');
+
+    useEffect(() => {
+
+        const fetchImage = async () => {
+            
+            try {
+                
+                const url = await fetchImageUrl(`food ${food.name}`);
+                console.log(url);
+                setImageUrl(url || '/assets/icons/image-missing.jpg');
+            } catch (error) {
+                console.error('Error fetching image URL:', error);
+            }
+        };
+        
+        fetchImage();
+    }, [food.name]);
 
     const handleAddNew = () => {
         try {
             const existingFoods = getSavedFoods();
             const newFoods = [...existingFoods, food];
             localStorage.setItem('foods', JSON.stringify(newFoods));
-            alert(localStorage.getItem('foods'));
+            
         } catch (error) {
             console.error('Error saving food to local storage', error);
         }
@@ -34,29 +51,29 @@ const Card =  ({
         max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all
         hover:shadow-lg md:min-h[438px]">
             <Link href={`/foods/${food.id}`}
-            style={{backgroundImage: `url(${imageUrl})`}}
-            className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500"/>
+                style={{ backgroundImage: `url(${imageUrl})` }}
+                className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500" />
             
             {(!added) && (
                 <div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-1 shadow-sm transition-all">
                     <button onClick={handleAddNew}
-                    title="Add New"
-                    className="group cursor-pointer outline-none hover:rotate-90 duration-300"
+                        title="Add New"
+                        className="group cursor-pointer outline-none hover:rotate-90 duration-300"
                     >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="35px"
-                        height="35px"
-                        viewBox="0 0 24 24"
-                        className="stroke-zinc-500 fill-none hover:fill-zinc-300 active:stroke-malachite-500 active:fill-malachite-100 active:duration-0 duration-300"
-                    >
-                        <path
-                        d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
-                        strokeWidth="1.5"
-                        ></path>
-                        <path d="M8 12H16" strokeWidth="1.5"></path>
-                        <path d="M12 16V8" strokeWidth="1.5"></path>
-                    </svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="35px"
+                            height="35px"
+                            viewBox="0 0 24 24"
+                            className="stroke-zinc-500 fill-none hover:fill-zinc-300 active:stroke-malachite-500 active:fill-malachite-100 active:duration-0 duration-300"
+                        >
+                            <path
+                                d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+                                strokeWidth="1.5"
+                            ></path>
+                            <path d="M8 12H16" strokeWidth="1.5"></path>
+                            <path d="M12 16V8" strokeWidth="1.5"></path>
+                        </svg>
                     </button>
                 </div>
             )}
@@ -72,10 +89,7 @@ const Card =  ({
                 <p className="p-medium-16  text-grey-500">
                     {` ${food.calories} Calories`}
                 </p>
-                
-                
-                
-                <HoverFood food={food}/>
+                <HoverFood food={food} />
                 <div className="flex-between w-full">
                     <p className="p-medium-14 md:p-medium-16 text-grey-600">
                         {`${food.serving_size_g} grams`}
@@ -83,7 +97,7 @@ const Card =  ({
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Card
+export default Card;
