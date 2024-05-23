@@ -1,15 +1,20 @@
+
+
 export const headerLinks = [
     {
       label: 'Home',
       route: '/',
+      alternateroute: null,
     },
     {
       label: 'Food Recomendatios',
       route: '/private/recommendations',
+      alternateroute: null,
     },
     {
       label: 'My Profile',
-      route: '/private/profile',
+      route: '/private/profile/myday',
+      alternateroute : '/private/profile/update',
     },
   ]
   
