@@ -40,6 +40,16 @@ export default async function recommendations({searchParams}: SearchParamProps) 
     calorias = 66.5 + (9.563 * (user.weight ?? 0)) + (1.850 * (user.height ?? 0)) - (4.676 * (user.age ?? 0))
   }
 
+  if(user.activity == 'Low to Nothing')  {
+    calorias = calorias * 1.2
+  }else if(user.activity == 'Light') {
+    calorias = calorias * 1.375
+  }else if(user.activity == 'Moderate') {
+    calorias = calorias * 1.55
+  }else if(user.activity == 'Always') {
+    calorias = calorias * 1.725
+  }
+
   let clasificacion = '';
   if (user.objective === "Gain Weight") {
     clasificacion = "Gain Weight";

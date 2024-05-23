@@ -179,6 +179,65 @@ export default function ProfileForm() {
               </div>
             </div>
           </div>
+          <div className="mt-4">
+            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900">
+              Activity
+            </label>
+            <div className="flex space-x-4 radio-button-container">
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  className="radio-button__input"
+                  id="radioActivity1"
+                  name="activity"
+                  value="Low to Nothing"
+                />
+                <label className="radio-button__label" htmlFor="radioActivity1">
+                  <span className="radio-button__custom"></span>
+                  Low to nothing
+                </label>
+              </div>
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  className="radio-button__input"
+                  id="radioActivity2"
+                  name="activity"
+                  value="Light"
+                />
+                <label className="radio-button__label" htmlFor="radioActivity2">
+                  <span className="radio-button__custom"></span>
+                  Light
+                </label>
+              </div>
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  className="radio-button__input"
+                  id="radioActivity3"
+                  name="activity"
+                  value="Moderate"
+                />
+                <label className="radio-button__label" htmlFor="radioActivity3">
+                  <span className="radio-button__custom"></span>
+                  Moderate
+                </label>
+              </div>
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  className="radio-button__input"
+                  id="radioActivity4"
+                  name="activity"
+                  value="Always"
+                />
+                <label className="radio-button__label" htmlFor="radioActivity4">
+                  <span className="radio-button__custom"></span>
+                  Always
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
         <SubmitButton />
         <div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">

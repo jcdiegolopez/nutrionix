@@ -10,6 +10,7 @@ export type UserCa = {
   weight? : number;
   height? : number;
   objective? : string;
+  activity?: string;
   // otros campos del usuario que puedas tener
 }
 

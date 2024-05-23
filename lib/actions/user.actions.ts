@@ -83,12 +83,15 @@ export const updateProfile = async (
     const session = driver.session();
     const userObj = await auth();
     const userEmail = userObj?.user?.email;
+    const currentPassword = formData.get("currentPassword") as string; // Assume the current password is provided
+
     const name = formData.get("name") as string;
     const gender = formData.get("gender") as string;
     const age = formData.get("age") as string;
     const weight = formData.get("weight") as string;
     const height = formData.get("height") as string;
     const objective = formData.get("objective") as string;
+    const activity = formData.get("activity") as string;
     console.log("Changing profile for user: " + userEmail);
     console.log(name);
     console.log(gender);
@@ -96,24 +99,29 @@ export const updateProfile = async (
     console.log(weight);
     console.log(height);
     console.log(objective);
+    console.log(activity);
     console.log("--------------------");
 
     const result = await session.run(
       `
       MATCH (u:User {email: $userEmail})
-      SET u.name = $name, u.gender = $gender, u.age = $age, u.weight = $weight, u.height = $height, u.objective = $objective
+      SET u.name = $name, u.gender = $gender, u.age = $age, u.weight = $weight, u.height = $height, u.objective = $objective, u.activity = $activity
       RETURN u
       `,
-      {userEmail, name, gender, age, weight, height, objective }
+      { userEmail, name, gender, age, weight, height, objective, activity }
     );
 
     session.close();
+
+    // Re-authenticate the user after profile update
+    await signIn('credentials', { email: userEmail, password: currentPassword });
 
     return result.records[0].get('u').properties;
   } catch (error) {
     handleError(error);
   }
 };
+
 
 
 export const getAllUsers = async () => {
