@@ -7,11 +7,9 @@ import { IFood } from "@/types"
 import { Button } from "@/components/ui/button";
 import { capitalizeWords, fetchImageUrl } from "@/lib/utils";
 
-type HoverFoodProps = {
-  food: IFood;
-}
 
-const HoverFood = ({ food }: HoverFoodProps) => {
+
+const HoverFood = ({ food }: {food: IFood}) => {
   return (
     <HoverCard openDelay={300} closeDelay={400}>
       <HoverCardTrigger className="cursor-pointer">

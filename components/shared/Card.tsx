@@ -6,6 +6,7 @@ import Link from "next/link";
 import HoverFood from "./HoverFood";
 import { useEffect, useState } from "react";
 import { getSavedFoods, clearFoods } from "@/lib/localUtils";
+import PopoverFood from "./PopoverFood";
 
 type CardProps = {
     food: IFood;
@@ -50,11 +51,13 @@ const Card = ({
         <div className="group relative flex min-h-[380px] w-full 
         max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all
         hover:shadow-lg md:min-h[438px]">
-            <Link href={`/foods/${food.id}`}
+            
+            <div
                 style={{ backgroundImage: `url(${imageUrl})` }}
                 className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500" />
-            
+    
             {(!added) && (
+                <>
                 <div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-1 shadow-sm transition-all">
                     <button onClick={handleAddNew}
                         title="Add New"
@@ -62,8 +65,8 @@ const Card = ({
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="35px"
-                            height="35px"
+                            width="25px"
+                            height="25px"
                             viewBox="0 0 24 24"
                             className="stroke-zinc-500 fill-none hover:fill-zinc-300 active:stroke-malachite-500 active:fill-malachite-100 active:duration-0 duration-300"
                         >
@@ -76,8 +79,10 @@ const Card = ({
                         </svg>
                     </button>
                 </div>
+                
+                </>
             )}
-            
+            <PopoverFood food={food} added={added}/>
             <div className="flex min-h-[230px] 
             flex-col gap-3 p-5 md:gap-4">
                 <div className="flex gap-2">

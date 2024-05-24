@@ -12,11 +12,13 @@ type CollectionProps = {
   totalPages?: number;
   urlParamName?: string;
   limit: number;
+  type?:string;
+
 
 }
 
 const Collection = ({
-  data,emptyTitle,emptyStateSubtext, page, totalPages = 0, urlParamName, limit
+  data,emptyTitle,emptyStateSubtext, page, totalPages = 0, urlParamName, limit, type
   }: CollectionProps) => {
   return (
     <>
@@ -24,7 +26,7 @@ const Collection = ({
       ( <div className="flex flex-col items-center gap-10">
         <ul className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
           {data.map((food) => {
-            const added = false;
+            const added = type == 'myfoods'
             
 
             return (
