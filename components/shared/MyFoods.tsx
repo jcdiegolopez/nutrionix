@@ -7,6 +7,7 @@ import ClassificationFilter from "@/components/shared/CategoryFilter";
 import ProportionFilter from "@/components/shared/ProportionFilter";
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { IFood } from '@/types';
 
 const MyFoods = () => {
     const [foods, setFoods] = useState([]);
@@ -23,7 +24,7 @@ const MyFoods = () => {
         }
     }, [foods]);
     
-    const totalCalories = Math.round(foods.map((food) => food.calories).reduce((a, b) => a + b, 0))
+    const totalCalories = Math.round(foods.map((food: IFood) => food.calories).reduce((a, b) => a + b, 0))
     return (
         <section id="foods" className="wrapper my-8 flex flex-col gap-8 md:12">
             <h2 className="h2-bold">Your Items<br/></h2>
