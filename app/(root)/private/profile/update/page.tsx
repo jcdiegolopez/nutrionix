@@ -12,8 +12,8 @@ export default function ProfileForm() {
       await dispatch(event);
       console.log("refreshing");
       router.refresh(); // Refresh the page
-      router.push('/private/profile/myday?doReload=true');
-      router.replace('/private/profile/myday?doReload=true');
+      router.push('/private/profile/myday');
+      router.replace('/private/profile/myday');
 
       router.push('/');
 
