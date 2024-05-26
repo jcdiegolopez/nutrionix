@@ -9,6 +9,11 @@ import { capitalizeWords, fetchImageUrl } from "@/lib/utils";
 
 
 
+/* This code defines a functional component named `HoverFood` that takes a prop `food` of type `IFood`.
+Inside the component, it renders a `HoverCard` component with a trigger and content. The trigger is
+a paragraph element displaying the capitalized name of the food item, and the content section
+displays various details about the food item such as calories, serving size, protein, fat, sugar,
+fiber, cholesterol, sodium, potassium, classification, and healthiness. */
 const HoverFood = ({ food }: {food: IFood}) => {
   return (
     <HoverCard openDelay={300} closeDelay={400}>

@@ -9,14 +9,23 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import { IFood } from '@/types';
 
+/* The `MyFoods` function component is defining a React component that manages a list of food items
+using the `useState` hook. */
 const MyFoods = () => {
     const [foods, setFoods] = useState([]);
 
+   /**
+    * The `resetFood` function clears the `foods` state and updates the local storage with an empty
+    * array.
+    */
     const resetFood = () => {
         setFoods([]);
         window.localStorage.setItem('foods', JSON.stringify([]));
     }
     
+    /* The `useEffect` hook in the provided code snippet is responsible for synchronizing the state of
+    the `foods` array in the component with the data stored in the local storage. Here's a breakdown
+    of what it does: */
     useEffect(() => {
         const storedFoods = window.localStorage.getItem('foods');
         if (storedFoods && JSON.stringify(foods) !== storedFoods) {
@@ -24,6 +33,8 @@ const MyFoods = () => {
         }
     }, [foods]);
     
+    /* The code snippet you provided is a React functional component named `MyFoods`. Here's a
+    breakdown of what it does: */
     const totalCalories = Math.round(foods.map((food: IFood) => food.calories).reduce((a, b) => a + b, 0))
     return (
         <section id="foods" className="wrapper my-8 flex flex-col gap-8 md:12">

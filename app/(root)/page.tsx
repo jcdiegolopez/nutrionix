@@ -7,12 +7,17 @@ import Collection from "@/components/shared/Collection";
 import { classificationType, healthyType } from "@/types";
 import { auth } from "@/auth";
 
+// Componente funcional Home que representa la página principal
 export default async function Home({searchParams}: SearchParamProps) {
+  // Extracción de parámetros de búsqueda desde searchParams o asignación de valores por defecto
+  const page = Number(searchParams?.page) || 1;
   const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || '';
   const classification = (searchParams?.classification as classificationType) || 'All';
+  // Llamada asíncrona a la API para obtener alimentos basados en los parámetros de búsqueda
   const healthy = (searchParams?.health as healthyType) || 'All';
   const foods = await getAllFoods({ limit: 6, page, classification: classification , query: searchText, healthy: healthy});
+  // Llamada asíncrona para autenticar al usuario
   const  user  = await auth();
   console.log('User naseh', user);
   

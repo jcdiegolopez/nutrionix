@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils"
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
+/* This code snippet defines a functional component called `Input` in TypeScript React. The component
+is created using `React.forwardRef` to forward the ref to the underlying input element. */
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (

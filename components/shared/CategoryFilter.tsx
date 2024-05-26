@@ -21,6 +21,14 @@ const ClassificationFilter = () => {
 
   
 
+  /**
+   * The function `onSelectClassification` updates the URL query parameters based on the selected
+   * classification and navigates to the new URL using React Router.
+   * @param {string} classification - Classification is a string that represents a category or type of
+   * data. In the provided code snippet, the `onSelectClassification` function is used to update the
+   * URL query parameters based on the selected classification. If the classification is not 'All', it
+   * adds the classification as a query parameter to the URL.
+   */
   const onSelectClassification = (classification: string) => {
       let newUrl = '';
 
@@ -40,6 +48,8 @@ const ClassificationFilter = () => {
       router.push(newUrl, { scroll: false });
   }
 
+  /* The `return` statement in the code snippet is rendering a JSX structure for a Select component
+  used in a React application. Here's a breakdown of the JSX structure: */
   return (
     <Select onValueChange={(value: string) => onSelectClassification(value)}>
       <SelectTrigger className="select-field">

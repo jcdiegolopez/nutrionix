@@ -8,6 +8,8 @@ const NavItems = () => {
     const pathname = usePathname();
     
 
+    /* This code snippet is a functional component in TypeScript React that generates a list of
+    navigation items based on the `headerLinks` array. Here's a breakdown of what it does: */
     return (
         <ul className="md:flex-between flex w-full flex-col items-start gap-5 md:flex-row">
             {headerLinks.map((link) => {

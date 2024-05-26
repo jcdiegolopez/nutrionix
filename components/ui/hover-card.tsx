@@ -9,6 +9,7 @@ const HoverCard = HoverCardPrimitive.Root
 
 const HoverCardTrigger = HoverCardPrimitive.Trigger
 
+/* This code snippet is defining a React component called `HoverCardContent` using `React.forwardRef`. */
 const HoverCardContent = React.forwardRef<
   React.ElementRef<typeof HoverCardPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>

@@ -4,6 +4,8 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+/* The `const buttonVariants = cva(...)` statement is defining a set of variants for styling buttons
+using the Class Variance Authority (CVA) library. Here's a breakdown of what it's doing: */
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
@@ -34,12 +36,18 @@ const buttonVariants = cva(
   }
 )
 
+/* The `export interface ButtonProps` statement is defining a TypeScript interface called
+`ButtonProps`. This interface extends two other interfaces: */
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
+/* The `const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(...)` statement is creating a
+React component called `Button` using the `React.forwardRef` function. This component accepts props
+defined by the `ButtonProps` interface and allows the parent component to pass a ref to the
+underlying button element. */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"

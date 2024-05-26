@@ -8,11 +8,24 @@ import { useEffect, useState } from "react";
 import { getSavedFoods, clearFoods } from "@/lib/localUtils";
 import PopoverFood from "./PopoverFood";
 
+/**
+ * The type `CardProps` in TypeScript React represents the props expected by a Card component,
+ * including a `food` object of type `IFood` and an optional `added` boolean flag.
+ * @property {IFood} food - The `food` property in the `CardProps` type represents an object of type
+ * `IFood`. It is likely used to store information about a food item that will be displayed in a card
+ * component.
+ * @property {boolean} added - The `added` property in the `CardProps` type is optional, meaning it may
+ * or may not be present when creating an object of type `CardProps`. If it is present, it should be a
+ * boolean value indicating whether the food item has been added or not.
+ */
 type CardProps = {
     food: IFood;
     added?: boolean;
 }
 
+/* The `const Card = ({ food, added = false }: CardProps) => { ... }` syntax in the code snippet is
+defining a functional React component named `Card` that takes in two props: `food` of type `IFood`
+and `added` of type `boolean` with a default value of `false`. */
 const Card = ({
     food,
     added = false
@@ -36,6 +49,10 @@ const Card = ({
         fetchImage();
     }, [food.name]);
 
+    /**
+     * The `handleAddNew` function adds a new food item to the existing list of foods stored in local
+     * storage.
+     */
     const handleAddNew = () => {
         try {
             const existingFoods = getSavedFoods();
@@ -47,6 +64,9 @@ const Card = ({
         }
     };
 
+    /* The `return` statement in the code snippet you provided is returning JSX elements that define
+    the structure and content of a React component called `Card`. Here's a breakdown of what the JSX
+    elements are doing: */
     return (
         <div className="group relative flex min-h-[380px] w-full 
         max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all

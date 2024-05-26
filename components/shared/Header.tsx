@@ -9,14 +9,26 @@ import { signOut, auth } from '@/auth'
 
 const poppins = Poppins({weight: ["100","200","700"], subsets: ['latin']})
 
+/**
+ * The type `HeaderProps` in TypeScript React can have a property `type` that is either `'navbar'` or
+ * `'hero'`.
+ * @property {'navbar' | 'hero'} type - The `HeaderProps` type defines a TypeScript interface for the
+ * properties that can be passed to a component called `Header`. The `type` property in `HeaderProps`
+ * is optional and can have one of two specific string values: `'navbar'` or `'hero'`. This property is
+ * used to
+ */
 type HeaderProps = {
   type?: 'navbar' | 'hero'
 }
 
+/* The code snippet `export const Header = async ({type = 'navbar'} : HeaderProps) => { const user =
+await auth();` is defining a React functional component named `Header` that is marked as `async`. */
 export const Header = async ({type = 'navbar'} : HeaderProps) => {
   const user = await auth();
 
   
+  /* The `return` statement in the code snippet you provided is defining the JSX structure of a header
+  component in a React application. Here's a breakdown of what it's doing: */
   return (
     <header className='w-full border-b'>
         <div className='wrapper flex items-center justify-between'>

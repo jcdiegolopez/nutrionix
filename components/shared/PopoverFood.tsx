@@ -8,6 +8,8 @@ import { IFood } from "@/types"
   
 
 
+/* This code defines a functional component called `PopoverFood` in TypeScript React. The component
+takes two props: `food` of type `IFood` and `added` of type `boolean`. */
 const PopoverFood = ({ food, added}: {food: IFood, added:boolean}) => {
   return (
     <Popover >

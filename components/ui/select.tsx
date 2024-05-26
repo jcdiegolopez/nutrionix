@@ -1,17 +1,23 @@
+// Indica que este módulo se ejecutará en el lado del cliente
 "use client"
 
+// Importaciones necesarias
 import * as React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
 import { Check, ChevronDown, ChevronUp } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils" // Asumiendo que 'cn' es una utilidad para concatenar clases de CSS
 
+// Componente raíz del Select
 const Select = SelectPrimitive.Root
 
+// Grupo de opciones del Select
 const SelectGroup = SelectPrimitive.Group
 
+// Componente para mostrar el valor seleccionado
 const SelectValue = SelectPrimitive.Value
 
+// Componente del disparador del Select (lo que se muestra como el campo del Select)
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
@@ -32,6 +38,7 @@ const SelectTrigger = React.forwardRef<
 ))
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 
+// Botón para desplazarse hacia arriba en la lista de opciones del Select
 const SelectScrollUpButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
@@ -49,6 +56,7 @@ const SelectScrollUpButton = React.forwardRef<
 ))
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName
 
+// Botón para desplazarse hacia abajo en la lista de opciones del Select
 const SelectScrollDownButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
@@ -64,9 +72,9 @@ const SelectScrollDownButton = React.forwardRef<
     <ChevronDown className="h-4 w-4" />
   </SelectPrimitive.ScrollDownButton>
 ))
-SelectScrollDownButton.displayName =
-  SelectPrimitive.ScrollDownButton.displayName
+SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName
 
+// Contenedor del contenido del Select, incluyendo las opciones
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
@@ -99,6 +107,7 @@ const SelectContent = React.forwardRef<
 ))
 SelectContent.displayName = SelectPrimitive.Content.displayName
 
+// Componente para la etiqueta de un grupo de opciones
 const SelectLabel = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
@@ -111,6 +120,7 @@ const SelectLabel = React.forwardRef<
 ))
 SelectLabel.displayName = SelectPrimitive.Label.displayName
 
+// Componente para una opción del Select
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
@@ -134,6 +144,7 @@ const SelectItem = React.forwardRef<
 ))
 SelectItem.displayName = SelectPrimitive.Item.displayName
 
+// Separador entre grupos de opciones
 const SelectSeparator = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
@@ -146,6 +157,7 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
+// Exportar todos los componentes para su uso en otros lugares
 export {
   Select,
   SelectGroup,

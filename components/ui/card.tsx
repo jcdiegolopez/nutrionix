@@ -2,6 +2,8 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/* This code snippet is defining a React functional component called `Card` using the
+`React.forwardRef` function. */
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -17,6 +19,8 @@ const Card = React.forwardRef<
 ))
 Card.displayName = "Card"
 
+/* This code snippet is defining a React functional component called `CardHeader` using the
+`React.forwardRef` function. */
 const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -29,6 +33,10 @@ const CardHeader = React.forwardRef<
 ))
 CardHeader.displayName = "CardHeader"
 
+/* The `const CardTitle` code snippet is defining a React functional component called `CardTitle` using
+the `React.forwardRef` function. This component is rendering an `<h3>` element with specific styling
+classes and attributes. The `forwardRef` function allows the component to receive a ref and pass it
+down to the underlying `<h3>` element. */
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
@@ -44,6 +52,9 @@ const CardTitle = React.forwardRef<
 ))
 CardTitle.displayName = "CardTitle"
 
+/* The `const CardDescription` code snippet is defining a React functional component called
+`CardDescription` using the `React.forwardRef` function. This component is responsible for rendering
+a `<p>` element with specific styling classes and attributes. */
 const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
@@ -56,6 +67,9 @@ const CardDescription = React.forwardRef<
 ))
 CardDescription.displayName = "CardDescription"
 
+/* The `const CardContent` code snippet is defining a React functional component called `CardContent`
+using the `React.forwardRef` function. This component is responsible for rendering a `<div>` element
+with specific styling classes and attributes. */
 const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -64,6 +78,9 @@ const CardContent = React.forwardRef<
 ))
 CardContent.displayName = "CardContent"
 
+/* The `const CardFooter` code snippet is defining a React functional component called `CardFooter`
+using the `React.forwardRef` function. This component is responsible for rendering a `<div>` element
+with specific styling classes and attributes. */
 const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
