@@ -11,7 +11,6 @@ import { auth } from "@/auth";
 export default async function Home({searchParams}: SearchParamProps) {
   // Extracción de parámetros de búsqueda desde searchParams o asignación de valores por defecto
   const page = Number(searchParams?.page) || 1;
-  const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || '';
   const classification = (searchParams?.classification as classificationType) || 'All';
   // Llamada asíncrona a la API para obtener alimentos basados en los parámetros de búsqueda
