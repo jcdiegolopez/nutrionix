@@ -5,11 +5,9 @@ import MyFoods from "@/components/shared/MyFoods";
 import { UserCa } from "@/types";
 import useRouter from "next/navigation";
 
-type PageProps = {
-  doReload?: boolean;
-};
 
-const Page: React.FC<PageProps> = async ({doReload = false} = {}) => {
+
+const Page = async () => {
   const user = (await auth())?.user as UserCa;
   console.log(user);
   const isUserDataIncomplete = !user?.gender || !user?.name || !user?.weight || !user?.age || !user?.height || !user?.objective || !user?.activity;
