@@ -1,17 +1,30 @@
 'use client';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { updateProfile } from '@/lib/actions/user.actions';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { useRouter } from 'next/navigation';
+import { Rotate3D } from 'lucide-react';
 export default function ProfileForm() {
   const router = useRouter(); // Initialize useRouter
   const [errorMessage, dispatch] = useFormState(updateProfile, undefined);
   const handleSubmit = async (event: any) => {
     try {
       await dispatch(event);
-      router.push('/private/profile/myday'); // Redirect to success page
+      console.log("refreshing");
+      router.refresh(); // Refresh the page
+      router.push('/private/profile/myday?doReload=true');
+      router.replace('/private/profile/myday?doReload=true');
+
+      router.push('/');
+
+
     } catch (error : any) {
       // Handle error (you already have error handling in place)
+      console.log("refreshing error");
+
+      router.refresh(); // Refresh the page
+      router.push('/private/profile/myday?doReload=true');
+
       throw(error.message);
     }
   };
@@ -236,6 +249,24 @@ export default function ProfileForm() {
                   Always
                 </label>
               </div>
+            </div>
+          </div>
+          <div className="mt-4">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              htmlFor="password"
+            >
+              Current Password
+            </label>
+            <div className="relative">
+              <input
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Enter your current password"
+                required
+              />
             </div>
           </div>
         </div>

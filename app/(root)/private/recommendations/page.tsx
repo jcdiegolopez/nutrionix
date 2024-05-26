@@ -10,6 +10,7 @@ import HealthFilter from "@/components/shared/HealthyFilter";
 import ClassificationFilter from "@/components/shared/CategoryFilter";
 import { auth } from "@/auth";
 import ProportionFilter from "@/components/shared/ProportionFilter";
+import { redirect } from "next/navigation";
 
 
 
@@ -17,20 +18,10 @@ export default async function recommendations({searchParams}: SearchParamProps) 
   const page = Number(searchParams?.page) || 1;
   const user = (await auth())?.user as UserCa;
   if (!user.email) {
-    return {
-      redirect: {
-        destination: '/auth/signin',
-        permanent: false,
-      },
-    };
+    redirect('/auth/signin');
   }
   if (!user.objective) {
-    return {
-      redirect: {
-        destination: '/private/profile',
-        permanent: false,
-      },
-    };
+    redirect('/private/profile/myday');
   }
   let calorias = 0;
   

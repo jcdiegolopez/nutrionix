@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import MyFoods from "@/components/shared/MyFoods";
 import { UserCa } from "@/types";
+import useRouter from "next/navigation";
 
 
 
-
-const Page = async () => {
+const Page = async ({doReload = false} = {}) => {
   const user = (await auth())?.user as UserCa;
   console.log(user);
   const isUserDataIncomplete = !user?.gender || !user?.name || !user?.weight || !user?.age || !user?.height || !user?.objective || !user?.activity;

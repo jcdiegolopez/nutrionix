@@ -1,10 +1,11 @@
 'use server'
-import { signIn, auth} from "@/auth";
+import { signIn, auth, signOut} from "@/auth";
 import connectToNeo4j from "../neo4j";
 import { handleError } from "../utils";
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcrypt';
-import { createUserParams, updateProfileParams} from '@/types';
+import { UserCa, UserPass, createUserParams, updateProfileParams} from '@/types';
+import { redirect } from "next/navigation";
 
 export async function signUp(
   prevState: string | undefined,
@@ -83,7 +84,7 @@ export const updateProfile = async (
     const session = driver.session();
     const userObj = await auth();
     const userEmail = userObj?.user?.email;
-    const currentPassword = formData.get("currentPassword") as string; // Assume the current password is provided
+    const currentPassword = formData.get("password") as string;
 
     const name = formData.get("name") as string;
     const gender = formData.get("gender") as string;
@@ -111,14 +112,21 @@ export const updateProfile = async (
       { userEmail, name, gender, age, weight, height, objective, activity }
     );
 
-    session.close();
+    console.log("Profile updated.");
+    await session.close();
+    console.log("Session closed.");
+    console.log("Signed out.");
 
     // Re-authenticate the user after profile update
+    console.log("Re-authenticating user...");
+    console.log("User email: " + userEmail);
+    console.log("Current password: " + currentPassword);
     await signIn('credentials', { email: userEmail, password: currentPassword });
+    console.log("Re-authenticated user.");
 
     return result.records[0].get('u').properties;
   } catch (error) {
-    handleError(error);
+    console.log("Error updating profile: " + error);
   }
 };
 

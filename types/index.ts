@@ -14,6 +14,22 @@ export type UserCa = {
   // otros campos del usuario que puedas tener
 }
 
+
+export type UserPass = {
+  id: string;
+  username: string;
+  email: string;
+  name? : string;
+  gender? : string;
+  age? : number;
+  weight? : number;
+  height? : number;
+  objective? : string;
+  activity?: string;
+  password?: string;
+  // otros campos del usuario que puedas tener
+}
+
 export type createUserParams = {
     email: string;
     username: string;
