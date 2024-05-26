@@ -4,12 +4,17 @@ Este proyecto web está desarrollado con [Next.js](https://nextjs.org/), utiliza
 
 ## Getting Started
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación en funcionamiento. Puedes comenzar a editar la página modificando `app/page.tsx`. La página se actualizará automáticamente mientras editas.
+Para iniciar el servidor de desarrollo, ejecuta:
 
-Este proyecto utiliza next/font para optimizar y cargar automáticamente Inter, una fuente personalizada de Google.
-
-## Algoritmos de Recomendación
-
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 ### Recomendación basada en contenido
 - **Descripción**: Recomienda elementos similares a los que un usuario ha mostrado interés previamente, basándose en las características y descripciones de los elementos.
 - **Características**: Utiliza atributos como etiquetas, categorías o descripciones para encontrar similitudes. No requiere datos sobre otros usuarios.
