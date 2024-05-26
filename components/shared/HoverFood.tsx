@@ -5,7 +5,8 @@ import {
 } from "@/components/ui/hover-card"
 import { IFood } from "@/types"
 import { Button } from "@/components/ui/button";
-import { capitalizeWords, fetchImageUrl } from "@/lib/utils";
+import { capitalizeWords } from "@/lib/utils";
+import { fetchImageUrl } from "@/lib/serverUtils";
 
 
 

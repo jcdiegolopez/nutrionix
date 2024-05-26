@@ -1,5 +1,6 @@
 "use client";
-import { capitalizeWords, fetchImageUrl } from "@/lib/utils";
+import { capitalizeWords } from "@/lib/utils";
+import { fetchImageUrl } from "@/lib/serverUtils";
 import { IFood } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
