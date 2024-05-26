@@ -7,6 +7,10 @@ Este proyecto web está desarrollado con [Next.js](https://nextjs.org/), utiliza
 Para iniciar el servidor de desarrollo, ejecuta:
 
 ```bash
+#Instalar paquetes
+npm install
+
+#Correr
 npm run dev
 # or
 yarn dev
