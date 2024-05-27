@@ -169,6 +169,8 @@ export const getUser = async (email: string) => {
             `MATCH (u:User) WHERE u.email = $email RETURN u`,
             { email }
         );
+        console.log("User found: ");
+        console.log(result.records);
         await session.close();
         return result.records.map(( record: any ) =>  { return {...record.toObject().u.properties, id: record.toObject().u.identity.toNumber()}});
     } catch (error) {

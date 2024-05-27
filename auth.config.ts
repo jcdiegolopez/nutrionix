@@ -1,7 +1,8 @@
 import type { NextAuthConfig } from 'next-auth';
 import type { UserCa } from '@/types';
+import { getUser } from './lib/actions/user.actions';
 
-export const authConfig = {
+export const authConfig: NextAuthConfig = {
   pages: {
     signIn: '/auth/signin',
   },
@@ -18,25 +19,29 @@ export const authConfig = {
       }
       return true;
     },
-    async session({ session, token} : { session: any, token: any }) {
-      // Include user data in the session, excluding the password
-
-      if (token?.user ) {
-        
-        const user = { id: token.user.id, email: token.user.email, username: token.user.username, gender: token.user.gender, name: token.user.name, weight: token.user.weight, height: token.user.height, age: token.user.age, objective: token.user.objective, activity: token.user.activity};
-        session.user = user;
-        
-        
+    async session({ session, token } : { session: any, token: any }) {
+      if (token?.user) {
+        session.user = {
+          id: token.user.id,
+          email: token.user.email,
+          username: token.user.username,
+          gender: token.user.gender,
+          name: token.user.name,
+          weight: token.user.weight,
+          height: token.user.height,
+          age: token.user.age,
+          objective: token.user.objective,
+          activity: token.user.activity
+        };
       }
       return session;
     },
     async jwt({ token, user }) {
-
       if (user) {
         token.user = user;
       }
       return token;
     }
   },
-  providers: [], // Add providers with an empty array for now
-} satisfies NextAuthConfig;
+  providers: [] // Add providers as needed
+};

@@ -4,12 +4,14 @@ import Link from "next/link";
 import MyFoods from "@/components/shared/MyFoods";
 import { UserCa } from "@/types";
 import useRouter from "next/navigation";
+import { getUser } from "@/lib/actions/user.actions";
 
 
 
 const Page = async () => {
-  const user = (await auth())?.user as UserCa;
-  console.log(user);
+  const userFromAuth = (await auth())?.user as UserCa;
+  const [user] = await getUser(userFromAuth.email);
+  console.log(user.name);
   const isUserDataIncomplete = !user?.gender || !user?.name || !user?.weight || !user?.age || !user?.height || !user?.objective || !user?.activity;
   let calorias = 0;
   
